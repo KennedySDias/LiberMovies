@@ -1,0 +1,33 @@
+ext {
+    // Android Libraries
+    appCompat_version = '1.1.0'
+    coreKtx_version = '1.1.0'
+    constraintLayout_version = '1.1.3'
+    material_version = '1.0.0'
+
+    //Third party libraries
+
+
+    //Unit Testing
+    junit_version = '4.12'
+
+    //UI Testing
+    espressoCore_version = '3.2.0'
+
+    mainApplicationDependencies = [
+            appCompat       : "androidx.appcompat:appcompat:$appCompat_version",
+            coreKtx         : "androidx.core:core-ktx:$coreKtx_version",
+            constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintLayout_version",
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            material        : "com.google.android.material:material:$material_version",
+    ]
+
+    unitTestDependencies = [
+            junit: "junit:junit:$junit_version"
+    ]
+
+    uiTestDependencies = [
+            espressoCore: "androidx.test.espresso:espresso-core:$espressoCore_version"
+    ]
+
+}
