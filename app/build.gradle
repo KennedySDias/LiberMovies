@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -19,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -34,6 +38,11 @@ dependencies {
     implementation mainApplicationDependencies.constraintLayout
     implementation mainApplicationDependencies.kotlin
     implementation mainApplicationDependencies.material
+    implementation mainApplicationDependencies.koinAndroid
+    implementation mainApplicationDependencies.koinAndroidScope
+    implementation mainApplicationDependencies.koinAndroidViewModel
+    implementation mainApplicationDependencies.glide
+    annotationProcessor mainApplicationDependencies.glide
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit
