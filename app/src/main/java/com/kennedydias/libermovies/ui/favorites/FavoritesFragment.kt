@@ -1,4 +1,4 @@
-package com.kennedydias.libermovies.ui.main
+package com.kennedydias.libermovies.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.base.BaseFragment
 
-class MainFragment : BaseFragment() {
+class FavoritesFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = FavoritesFragment()
     }
 
     override fun onBackPressed(): Boolean {
@@ -23,7 +23,7 @@ class MainFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
