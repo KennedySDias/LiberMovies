@@ -38,9 +38,9 @@ dependencies {
     implementation project(path: ':common')
 
     // Main Application dependencies
-    implementation mainApplicationDependencies.koinAndroid
-    implementation mainApplicationDependencies.koinAndroidScope
-    implementation mainApplicationDependencies.koinAndroidViewModel
+    implementation mainApplicationDependencies.koinCore
+    implementation mainApplicationDependencies.koinAndroidXScope
+    implementation mainApplicationDependencies.koinAndroidXViewModel
     implementation mainApplicationDependencies.kotlinCoroutinesCore
     implementation mainApplicationDependencies.kotlinCoroutinesAndroid
     implementation mainApplicationDependencies.gson
@@ -49,6 +49,7 @@ dependencies {
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit
+    testImplementation mainApplicationDependencies.koinTest
 
     // UI tests dependencies
     androidTestImplementation uiTestDependencies.espressoCore
