@@ -2,68 +2,108 @@ package com.kennedydias.libermovies.ui.movies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kennedydias.libermovies.domain.usecase.GetMoviesListUseCase
+import com.kennedydias.libermovies.domain.usecase.GetSeriesListUseCase
+import com.kennedydias.libermovies.expection.NotConnectedException
+import com.kennedydias.libermovies.expection.UnauthorizedException
+import java.util.concurrent.TimeoutException
 
-class MoviesViewModel : ViewModel() {
+class MoviesViewModel(
+    private val moviesListUseCase: GetMoviesListUseCase,
+    private val seriesListUseCase: GetSeriesListUseCase
+) : ViewModel() {
 
-    val movies: MutableLiveData<List<MovieData>> = MutableLiveData()
-    val series: MutableLiveData<List<MovieData>> = MutableLiveData()
+    val moviesOb = MutableLiveData<List<MovieData>>()
+    val seriesOb = MutableLiveData<List<MovieData>>()
+    val errorOb = MutableLiveData<String>()
+    val fatalErrorOb = MutableLiveData<String>()
+    val notConnectedOb = MutableLiveData<Boolean>()
+    val gettingMoviesOb = MutableLiveData<Boolean>()
+    val gettingSeriesOb = MutableLiveData<Boolean>()
+
+    var searchOb: String? = null
+
+    fun init() {
+        getMovies()
+        getSeries()
+    }
 
     fun getMovies() {
-        movies.value = listOf(
-            MovieData(
-                title = "Captain Marvel",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Marvel One-Shot: Item 47",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BMTM2MzY1ODcyN15BMl5BanBnXkFtZTcwNTE3OTIxOA@@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Marvel One-Shot: All Hail the King",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BYTQzNzZiOWItOTNlMC00MjA4LWI5ZTAtODk3MmQ2MGJiYTdmXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Lego Marvel Super Heroes",
-                poster =
-                "https://ia.media-imdb.com/images/M/MV5BOTA5ODA2NTI2M15BMl5BanBnXkFtZTgwNTcxMzU1MDE@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Adventures of Captain Marvel",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BNjg0NTk3NjUyNF5BMl5BanBnXkFtZTgwNDQ5MjM1MjE@._V1_SX300.jpg"
-            )
-        )
+        notConnectedOb.value = false
+        gettingMoviesOb.value = true
 
-        series.value = listOf(
-            MovieData(
-                title = "Captain Marvel",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Marvel One-Shot: Item 47",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BMTM2MzY1ODcyN15BMl5BanBnXkFtZTcwNTE3OTIxOA@@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Marvel One-Shot: All Hail the King",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BYTQzNzZiOWItOTNlMC00MjA4LWI5ZTAtODk3MmQ2MGJiYTdmXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Lego Marvel Super Heroes",
-                poster =
-                "https://ia.media-imdb.com/images/M/MV5BOTA5ODA2NTI2M15BMl5BanBnXkFtZTgwNTcxMzU1MDE@._V1_SX300.jpg"
-            ),
-            MovieData(
-                title = "Adventures of Captain Marvel",
-                poster =
-                "https://m.media-amazon.com/images/M/MV5BNjg0NTk3NjUyNF5BMl5BanBnXkFtZTgwNDQ5MjM1MjE@._V1_SX300.jpg"
-            )
-        )
+        moviesListUseCase.search = searchOb
+        moviesListUseCase.execute {
+
+            onComplete {
+                gettingMoviesOb.value = false
+                moviesOb.value = it.search?.map { movie ->
+                    MovieData.fromMoviesShortResponseModel(movie)
+                } ?: emptyList()
+            }
+
+            onError { error ->
+                gettingMoviesOb.value = false
+                when (error) {
+                    is UnauthorizedException -> {
+                        fatalErrorOb.value = error.message
+                    }
+                    is TimeoutException -> {
+                        errorOb.value = error.message
+                    }
+                    is NotConnectedException -> {
+                        notConnectedOb.value = true
+                    }
+                    else -> {
+                        errorOb.value = error.message
+                    }
+                }
+            }
+
+            onCancel { throwable ->
+                gettingMoviesOb.value = false
+            }
+
+        }
+    }
+
+    fun getSeries() {
+        notConnectedOb.value = false
+        gettingSeriesOb.value = true
+
+        seriesListUseCase.search = searchOb
+        seriesListUseCase.execute {
+
+            onComplete {
+                gettingSeriesOb.value = false
+                seriesOb.value = it.search?.map { movie ->
+                    MovieData.fromMoviesShortResponseModel(movie)
+                } ?: emptyList()
+            }
+
+            onError { error ->
+                gettingSeriesOb.value = false
+                when (error) {
+                    is UnauthorizedException -> {
+                        fatalErrorOb.value = error.message
+                    }
+                    is TimeoutException -> {
+                        errorOb.value = error.message
+                    }
+                    is NotConnectedException -> {
+                        notConnectedOb.value = true
+                    }
+                    else -> {
+                        errorOb.value = error.message
+                    }
+                }
+            }
+
+            onCancel { throwable ->
+                gettingSeriesOb.value = false
+            }
+
+        }
     }
 
 }

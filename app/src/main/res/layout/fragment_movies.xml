@@ -21,7 +21,7 @@
             android:background="@color/colorScreenBackground">
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchViewFavorites"
+                android:id="@+id/searchView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8sp"
@@ -45,7 +45,7 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/movies"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                app:layout_constraintTop_toBottomOf="@+id/searchViewFavorites" />
+                app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMovies"
