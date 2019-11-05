@@ -55,7 +55,7 @@ dependencies {
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit
-    testImplementation mainApplicationDependencies.koinTest
+    testImplementation unitTestDependencies.koinTest
 
     // UI tests dependencies
     androidTestImplementation uiTestDependencies.espressoCore
