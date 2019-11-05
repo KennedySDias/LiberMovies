@@ -1,7 +1,7 @@
-package com.kennedydias.libermovies.data.api
+package com.kennedydias.data.api
 
 import com.google.gson.GsonBuilder
-import com.kennedydias.libermovies.BuildConfig
+import com.kennedydias.data.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

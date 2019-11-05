@@ -1,55 +1,50 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+
+
     defaultConfig {
-        applicationId "com.kennedydias.libermovies"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
+        debug {
+            // Just to show that we can change the configs on Debug environment
+            buildConfigField "String", "OMBD_API", "\"https://www.omdbapi.com\""
+            buildConfigField "String", "OMBD_API_KEY", "\"API_KEY\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "OMBD_API", "\"https://www.omdbapi.com\""
+            buildConfigField "String", "OMBD_API_KEY", "\"API_KEY\""
         }
     }
-    dataBinding {
-        enabled true
-    }
+
 }
 
 dependencies {
-    def mainApplicationDependencies = rootProject.ext.mainApplicationDependencies
-    def unitTestDependencies = rootProject.ext.unitTestDependencies
-    def uiTestDependencies = rootProject.ext.uiTestDependencies
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':data')
 
     // Main Application dependencies
-    implementation mainApplicationDependencies.appCompat
-    implementation mainApplicationDependencies.coreKtx
-    implementation mainApplicationDependencies.constraintLayout
-    implementation mainApplicationDependencies.kotlin
-    implementation mainApplicationDependencies.material
     implementation mainApplicationDependencies.koinAndroid
     implementation mainApplicationDependencies.koinAndroidScope
     implementation mainApplicationDependencies.koinAndroidViewModel
-    implementation mainApplicationDependencies.glide
     implementation mainApplicationDependencies.kotlinCoroutinesCore
     implementation mainApplicationDependencies.kotlinCoroutinesAndroid
     implementation mainApplicationDependencies.gson
     implementation mainApplicationDependencies.retrofit
     implementation mainApplicationDependencies.retrofitConverterGson
-
-    annotationProcessor mainApplicationDependencies.glide
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit

@@ -1,4 +1,4 @@
-package com.kennedydias.libermovies.base
+package com.kennedydias.libermovies.ui.base
 
 import android.view.View
 import android.view.ViewGroup

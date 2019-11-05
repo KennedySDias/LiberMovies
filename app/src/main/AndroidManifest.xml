@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".base.BaseActivity"
+            android:name="com.kennedydias.libermovies.ui.base.BaseActivity"
             android:theme="@style/AppTheme" />
     </application>
 

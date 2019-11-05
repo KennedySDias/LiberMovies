@@ -1,6 +1,6 @@
 package com.kennedydias.libermovies.ui.movies
 
-import com.kennedydias.libermovies.data.api.responsemodel.MovieShortResponseModel
+import com.kennedydias.data.api.responsemodel.MovieShortResponseModel
 
 class MovieData(
     val title: String,

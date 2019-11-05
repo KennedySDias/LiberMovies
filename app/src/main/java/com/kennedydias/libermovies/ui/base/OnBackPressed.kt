@@ -1,4 +1,4 @@
-package com.kennedydias.libermovies.base
+package com.kennedydias.libermovies.ui.base
 
 interface OnBackPressed {
     /**

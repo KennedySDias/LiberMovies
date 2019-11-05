@@ -1,8 +1,8 @@
-package com.kennedydias.libermovies.data.api.repository
+package com.kennedydias.data.api.repository
 
-import com.kennedydias.libermovies.BuildConfig
-import com.kennedydias.libermovies.data.api.responsemodel.MovieFullResponseModel
-import com.kennedydias.libermovies.data.api.responsemodel.MoviesListResponseModel
+import com.kennedydias.data.BuildConfig
+import com.kennedydias.data.api.responsemodel.MovieFullResponseModel
+import com.kennedydias.data.api.responsemodel.MoviesListResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

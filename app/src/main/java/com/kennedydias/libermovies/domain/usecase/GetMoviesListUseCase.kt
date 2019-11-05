@@ -1,7 +1,7 @@
 package com.kennedydias.libermovies.domain.usecase
 
-import com.kennedydias.libermovies.data.api.repository.MoviesRepository
-import com.kennedydias.libermovies.data.api.responsemodel.MoviesListResponseModel
+import com.kennedydias.data.api.repository.MoviesRepository
+import com.kennedydias.data.api.responsemodel.MoviesListResponseModel
 
 class GetMoviesListUseCase(
     private val moviesRepository: MoviesRepository

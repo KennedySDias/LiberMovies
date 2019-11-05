@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kennedydias.libermovies.R
-import com.kennedydias.libermovies.base.BaseFragment
+import com.kennedydias.libermovies.ui.base.BaseFragment
 
 class FavoritesFragment : BaseFragment() {
 

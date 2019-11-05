@@ -1,4 +1,4 @@
-package com.kennedydias.libermovies.data.api.responsemodel
+package com.kennedydias.data.api.responsemodel
 
 import com.google.gson.annotations.SerializedName
 

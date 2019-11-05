@@ -8,7 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kennedydias.libermovies.R
-import com.kennedydias.libermovies.base.BaseFragment
+import com.kennedydias.libermovies.ui.base.BaseFragment
 import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
 import com.kennedydias.libermovies.extensions.observe
 import kotlinx.android.synthetic.main.fragment_movies.*

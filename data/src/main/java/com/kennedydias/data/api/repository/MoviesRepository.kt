@@ -1,8 +1,8 @@
-package com.kennedydias.libermovies.data.api.repository
+package com.kennedydias.data.api.repository
 
-import com.kennedydias.libermovies.data.api.RetrofitBuilder
-import com.kennedydias.libermovies.data.api.responsemodel.MovieFullResponseModel
-import com.kennedydias.libermovies.data.api.responsemodel.MoviesListResponseModel
+import com.kennedydias.data.api.RetrofitBuilder
+import com.kennedydias.data.api.responsemodel.MovieFullResponseModel
+import com.kennedydias.data.api.responsemodel.MoviesListResponseModel
 
 interface MoviesRepository {
 
