@@ -1,10 +1,10 @@
 package com.kennedydias.domain.usecase
 
 import com.kennedydias.data.model.MoviesListModel
-import com.kennedydias.data.remote.repository.MoviesRepository
+import com.kennedydias.data.remote.repository.MoviesService
 
 class GetSeriesListUseCase(
-    private val moviesRepository: MoviesRepository
+    private val moviesRepository: MoviesService
 ) : UseCase<MoviesListModel>() {
 
     var search: String? = null

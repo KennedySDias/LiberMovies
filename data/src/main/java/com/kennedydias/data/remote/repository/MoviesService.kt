@@ -4,7 +4,7 @@ import com.kennedydias.data.model.MovieFullModel
 import com.kennedydias.data.model.MoviesListModel
 import com.kennedydias.data.remote.RetrofitBuilder
 
-interface MoviesRepository {
+interface MoviesService {
 
     suspend fun getMoviesList(
         search: String? = null,
@@ -23,8 +23,8 @@ interface MoviesRepository {
 
 }
 
-class MoviesRepositoryImpl(private val retrofit: RetrofitBuilder) :
-    MoviesRepository {
+class MoviesServiceImpl(private val retrofit: RetrofitBuilder) :
+    MoviesService {
 
     override suspend fun getMoviesList(
         search: String?,

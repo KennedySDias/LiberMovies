@@ -1,10 +1,10 @@
 package com.kennedydias.domain.usecase
 
 import com.kennedydias.data.model.MovieFullModel
-import com.kennedydias.data.remote.repository.MoviesRepository
+import com.kennedydias.data.remote.repository.MoviesService
 
 class GetMovieDetailsUseCase(
-    private val moviesRepository: MoviesRepository
+    private val moviesRepository: MoviesService
 ) : UseCase<MovieFullModel>() {
 
     var imdbId: String? = null

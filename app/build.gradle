@@ -50,12 +50,16 @@ dependencies {
     implementation mainApplicationDependencies.gson
     implementation mainApplicationDependencies.retrofit
     implementation mainApplicationDependencies.retrofitConverterGson
+    implementation mainApplicationDependencies.RoomRuntime
+    implementation mainApplicationDependencies.RoomKtx
+    kapt mainApplicationDependencies.RoomCompiler
 
     annotationProcessor mainApplicationDependencies.glide
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit
     testImplementation unitTestDependencies.koinTest
+    testImplementation unitTestDependencies.RoomTesting
 
     // UI tests dependencies
     androidTestImplementation uiTestDependencies.espressoCore
