@@ -1,4 +1,4 @@
-package com.kennedydias.data.api
+package com.kennedydias.data.remote
 
 import com.google.gson.GsonBuilder
 import com.kennedydias.data.BuildConfig

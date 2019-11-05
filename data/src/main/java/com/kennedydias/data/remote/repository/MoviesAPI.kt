@@ -1,8 +1,8 @@
-package com.kennedydias.data.api.repository
+package com.kennedydias.data.remote.repository
 
 import com.kennedydias.data.BuildConfig
-import com.kennedydias.data.api.responsemodel.MovieFullResponseModel
-import com.kennedydias.data.api.responsemodel.MoviesListResponseModel
+import com.kennedydias.data.model.MovieFullModel
+import com.kennedydias.data.model.MoviesListModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,7 +17,7 @@ interface MoviesAPI {
         @Query("r") typeReturn: String? = "json",
         @Query("apikey") apiKey: String? = BuildConfig.OMBD_API_KEY,
         @Query("v") apiVersion: Int? = 1
-    ): MoviesListResponseModel
+    ): MoviesListModel
 
     @GET("/")
     suspend fun getMovieDetails(
@@ -29,6 +29,6 @@ interface MoviesAPI {
         @Query("r") typeReturn: String? = "json",
         @Query("apikey") apiKey: String? = BuildConfig.OMBD_API_KEY,
         @Query("v") apiVersion: Int? = 1
-    ): MovieFullResponseModel
+    ): MovieFullModel
 
 }

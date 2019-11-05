@@ -1,8 +1,8 @@
-package com.kennedydias.data.api.responsemodel
+package com.kennedydias.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieShortResponseModel(
+data class MovieShortModel(
     @SerializedName("Title") val title: String? = null,
     @SerializedName("Year") val year: String? = null,
     @SerializedName("imdbID") val imdbID: String? = null,

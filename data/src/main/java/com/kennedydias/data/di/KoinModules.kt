@@ -1,8 +1,8 @@
 package com.kennedydias.data.di
 
-import com.kennedydias.data.api.RetrofitBuilder
-import com.kennedydias.data.api.repository.MoviesRepository
-import com.kennedydias.data.api.repository.MoviesRepositoryImpl
+import com.kennedydias.data.remote.RetrofitBuilder
+import com.kennedydias.data.remote.repository.MoviesRepository
+import com.kennedydias.data.remote.repository.MoviesRepositoryImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.dsl.module

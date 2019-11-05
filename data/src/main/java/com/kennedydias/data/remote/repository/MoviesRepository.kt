@@ -1,8 +1,8 @@
-package com.kennedydias.data.api.repository
+package com.kennedydias.data.remote.repository
 
-import com.kennedydias.data.api.RetrofitBuilder
-import com.kennedydias.data.api.responsemodel.MovieFullResponseModel
-import com.kennedydias.data.api.responsemodel.MoviesListResponseModel
+import com.kennedydias.data.model.MovieFullModel
+import com.kennedydias.data.model.MoviesListModel
+import com.kennedydias.data.remote.RetrofitBuilder
 
 interface MoviesRepository {
 
@@ -10,8 +10,8 @@ interface MoviesRepository {
         search: String? = null,
         type: String? = null,
         year: String? = null,
-        page: Int? = 1
-    ): MoviesListResponseModel
+        page: Int? = null
+    ): MoviesListModel
 
     suspend fun getMovieDetails(
         imdbId: String? = null,
@@ -19,7 +19,7 @@ interface MoviesRepository {
         type: String? = null,
         year: String? = null,
         plot: String? = null
-    ): MovieFullResponseModel
+    ): MovieFullModel
 
 }
 
@@ -31,7 +31,7 @@ class MoviesRepositoryImpl(private val retrofit: RetrofitBuilder) :
         type: String?,
         year: String?,
         page: Int?
-    ): MoviesListResponseModel {
+    ): MoviesListModel {
         return retrofit
             .build(MoviesAPI::class.java)
             .getMovies(search, type, year, page)
@@ -43,7 +43,7 @@ class MoviesRepositoryImpl(private val retrofit: RetrofitBuilder) :
         type: String?,
         year: String?,
         plot: String?
-    ): MovieFullResponseModel {
+    ): MovieFullModel {
         return retrofit
             .build(MoviesAPI::class.java)
             .getMovieDetails(imdbId, title, type, year, plot)

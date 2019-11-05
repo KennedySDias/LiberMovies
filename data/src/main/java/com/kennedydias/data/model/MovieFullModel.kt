@@ -1,8 +1,8 @@
-package com.kennedydias.data.api.responsemodel
+package com.kennedydias.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieFullResponseModel(
+data class MovieFullModel(
     @SerializedName("Title") val title: String? = null,
     @SerializedName("Year") val year: String? = null,
     @SerializedName("Rated") val rated: String? = null,
@@ -27,5 +27,5 @@ data class MovieFullResponseModel(
     @SerializedName("Production") val production: String? = null,
     @SerializedName("Website") val website: String? = null,
     @SerializedName("Response") val response: String? = null,
-    @SerializedName("Ratings") val ratings: List<MovieRatingResponseModel>? = null
+    @SerializedName("Ratings") val ratings: List<MovieRatingModel>? = null
 )

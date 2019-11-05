@@ -1,6 +1,6 @@
 package com.kennedydias.libermovies.ui.movies
 
-import com.kennedydias.data.api.responsemodel.MovieShortResponseModel
+import com.kennedydias.data.model.MovieShortModel
 
 class MovieData(
     val title: String,
@@ -10,7 +10,7 @@ class MovieData(
     val year: String
 ) {
     companion object {
-        fun fromMoviesShortResponseModel(movie: MovieShortResponseModel) =
+        fun fromMoviesShortResponseModel(movie: MovieShortModel) =
             MovieData(
                 title = movie.title ?: "",
                 poster = movie.poster ?: "",
