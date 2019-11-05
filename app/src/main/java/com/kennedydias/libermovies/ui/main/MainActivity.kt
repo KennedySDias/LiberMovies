@@ -5,8 +5,8 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kennedydias.libermovies.R
-import com.kennedydias.libermovies.base.BaseActivity
-import com.kennedydias.libermovies.extensions.addFragment
+import com.kennedydias.libermovies.ui.base.BaseActivity
+import com.kennedydias.commom.extensions.addFragment
 import com.kennedydias.libermovies.ui.favorites.FavoritesFragment
 import com.kennedydias.libermovies.ui.movies.MoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*

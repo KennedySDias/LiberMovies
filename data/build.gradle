@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            // Just to show that we can change the configs on Debug environment
+            buildConfigField "String", "OMBD_API", "\"https://www.omdbapi.com\""
+            buildConfigField "String", "OMBD_API_KEY", "\"API_KEY\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "OMBD_API", "\"https://www.omdbapi.com\""
+            buildConfigField "String", "OMBD_API_KEY", "\"API_KEY\""
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':common')
+
+    // Main Application dependencies
+    implementation mainApplicationDependencies.koinAndroid
+    implementation mainApplicationDependencies.koinAndroidScope
+    implementation mainApplicationDependencies.koinAndroidViewModel
+    implementation mainApplicationDependencies.kotlinCoroutinesCore
+    implementation mainApplicationDependencies.kotlinCoroutinesAndroid
+    implementation mainApplicationDependencies.gson
+    implementation mainApplicationDependencies.retrofit
+    implementation mainApplicationDependencies.retrofitConverterGson
+
+    // Unit tests dependencies
+    testImplementation unitTestDependencies.junit
+
+    // UI tests dependencies
+    androidTestImplementation uiTestDependencies.espressoCore
+}
