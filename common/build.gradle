@@ -27,18 +27,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':data')
-    implementation project(path: ':common')
 
     // Main Application dependencies
+    implementation mainApplicationDependencies.appCompat
     implementation mainApplicationDependencies.coreKtx
+    implementation mainApplicationDependencies.constraintLayout
     implementation mainApplicationDependencies.kotlin
-    implementation mainApplicationDependencies.koinAndroid
-    implementation mainApplicationDependencies.koinAndroidScope
-    implementation mainApplicationDependencies.koinAndroidViewModel
-    implementation mainApplicationDependencies.kotlinCoroutinesCore
-    implementation mainApplicationDependencies.kotlinCoroutinesAndroid
-    implementation mainApplicationDependencies.retrofit
+    implementation mainApplicationDependencies.material
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit

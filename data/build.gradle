@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':common')
 
     // Main Application dependencies
     implementation mainApplicationDependencies.koinAndroid

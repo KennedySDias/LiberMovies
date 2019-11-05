@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kennedydias.domain.usecase.GetMoviesListUseCase
 import com.kennedydias.domain.usecase.GetSeriesListUseCase
-import com.kennedydias.libermovies.expection.NotConnectedException
-import com.kennedydias.libermovies.expection.UnauthorizedException
+import com.kennedydias.commom.expection.NotConnectedException
+import com.kennedydias.commom.expection.UnauthorizedException
 import java.util.concurrent.TimeoutException
 
 class MoviesViewModel(

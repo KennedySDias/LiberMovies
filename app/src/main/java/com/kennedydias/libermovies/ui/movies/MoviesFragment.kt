@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.ui.base.BaseFragment
 import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
-import com.kennedydias.libermovies.extensions.observe
+import com.kennedydias.commom.extensions.observe
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

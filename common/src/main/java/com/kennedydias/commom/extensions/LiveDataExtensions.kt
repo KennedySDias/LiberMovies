@@ -1,4 +1,4 @@
-package com.kennedydias.libermovies.extensions
+package com.kennedydias.commom.extensions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

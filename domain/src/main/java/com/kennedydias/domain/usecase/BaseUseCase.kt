@@ -1,6 +1,9 @@
 package com.kennedydias.domain.usecase
 
+import com.kennedydias.commom.expection.NotConnectedException
+import com.kennedydias.commom.expection.UnauthorizedException
 import kotlinx.coroutines.*
+import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
