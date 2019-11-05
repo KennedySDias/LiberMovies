@@ -1,4 +1,4 @@
-package com.kennedydias.libermovies.domain.usecase
+package com.kennedydias.domain.usecase
 
 import com.kennedydias.data.api.repository.MoviesRepository
 import com.kennedydias.data.api.responsemodel.MovieFullResponseModel

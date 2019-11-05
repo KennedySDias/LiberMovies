@@ -1,9 +1,6 @@
-package com.kennedydias.libermovies.domain.usecase
+package com.kennedydias.domain.usecase
 
-import com.kennedydias.libermovies.expection.NotConnectedException
-import com.kennedydias.libermovies.expection.UnauthorizedException
 import kotlinx.coroutines.*
-import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

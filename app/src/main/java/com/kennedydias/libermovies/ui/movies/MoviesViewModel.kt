@@ -2,8 +2,8 @@ package com.kennedydias.libermovies.ui.movies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kennedydias.libermovies.domain.usecase.GetMoviesListUseCase
-import com.kennedydias.libermovies.domain.usecase.GetSeriesListUseCase
+import com.kennedydias.domain.usecase.GetMoviesListUseCase
+import com.kennedydias.domain.usecase.GetSeriesListUseCase
 import com.kennedydias.libermovies.expection.NotConnectedException
 import com.kennedydias.libermovies.expection.UnauthorizedException
 import java.util.concurrent.TimeoutException
