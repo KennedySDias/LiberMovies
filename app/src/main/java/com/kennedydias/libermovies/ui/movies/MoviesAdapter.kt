@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.kennedydias.domain.model.MovieShortData
 import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.databinding.ListItemMoviesBinding
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    val movies: MutableList<MovieData> = mutableListOf()
+    val movies: MutableList<MovieShortData> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(
@@ -30,7 +31,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         binding?.executePendingBindings()
     }
 
-    fun updateAll(list: List<MovieData>) {
+    fun updateAll(list: List<MovieShortData>) {
         movies.clear()
         movies.addAll(list)
         notifyDataSetChanged()

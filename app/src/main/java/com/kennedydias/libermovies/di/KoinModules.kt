@@ -6,6 +6,7 @@ import com.kennedydias.data.cache.MoviesDatabase
 import com.kennedydias.data.remote.RetrofitBuilder
 import com.kennedydias.data.remote.repository.MoviesService
 import com.kennedydias.data.remote.repository.MoviesServiceImpl
+import com.kennedydias.domain.mapper.MovieMapper
 import com.kennedydias.domain.usecase.GetMovieDetailsUseCase
 import com.kennedydias.domain.usecase.GetMoviesListUseCase
 import com.kennedydias.domain.usecase.GetSeriesDetailsUseCase
@@ -20,12 +21,10 @@ val ViewModelModules: Module = module {
     viewModel { MoviesViewModel(get(), get()) }
 }
 
-val RepositoryModules: Module = module {
+val DataModules: Module = module {
     factory { MoviesServiceImpl(get()) as MoviesService }
     factory { MoviesRepository(get(), get()) }
-}
 
-val CommonModules: Module = module {
     factory { RetrofitBuilder(androidContext().cacheDir) }
     factory {
         Room.databaseBuilder(
@@ -35,9 +34,11 @@ val CommonModules: Module = module {
     }
 }
 
-val UseCases: Module = module {
-    factory { GetMoviesListUseCase(get()) }
-    factory { GetMovieDetailsUseCase(get()) }
-    factory { GetSeriesListUseCase(get()) }
-    factory { GetSeriesDetailsUseCase(get()) }
+val DomainModules: Module = module {
+    single { MovieMapper() }
+
+    factory { GetMoviesListUseCase(get(), get()) }
+    factory { GetMovieDetailsUseCase(get(), get()) }
+    factory { GetSeriesListUseCase(get(), get()) }
+    factory { GetSeriesDetailsUseCase(get(), get()) }
 }
