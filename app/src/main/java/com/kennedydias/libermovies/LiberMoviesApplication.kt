@@ -1,10 +1,11 @@
 package com.kennedydias.libermovies
 
 import android.app.Application
-import com.kennedydias.data.di.CommonModules
-import com.kennedydias.data.di.RepositoryModules
-import com.kennedydias.domain.di.UseCases
+import com.kennedydias.libermovies.di.CommonModules
+import com.kennedydias.libermovies.di.RepositoryModules
+import com.kennedydias.libermovies.di.UseCases
 import com.kennedydias.libermovies.di.ViewModelModules
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class LiberMoviesApplication : Application() {
@@ -26,14 +27,15 @@ class LiberMoviesApplication : Application() {
         )
 
         startKoin {
+            // Android context
+            androidContext(this@LiberMoviesApplication)
+            // modules
             modules(appModules)
         }
     }
 
     companion object {
-
         lateinit var instance: LiberMoviesApplication
-
     }
 
 }

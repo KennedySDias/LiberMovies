@@ -33,15 +33,16 @@ dependencies {
     // Main Application dependencies
     implementation mainApplicationDependencies.coreKtx
     implementation mainApplicationDependencies.kotlin
-    implementation mainApplicationDependencies.koinAndroid
-    implementation mainApplicationDependencies.koinAndroidScope
-    implementation mainApplicationDependencies.koinAndroidViewModel
+    implementation mainApplicationDependencies.koinCore
+    implementation mainApplicationDependencies.koinAndroidXScope
+    implementation mainApplicationDependencies.koinAndroidXViewModel
     implementation mainApplicationDependencies.kotlinCoroutinesCore
     implementation mainApplicationDependencies.kotlinCoroutinesAndroid
     implementation mainApplicationDependencies.retrofit
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit
+    testImplementation unitTestDependencies.koinTest
 
     // UI tests dependencies
     androidTestImplementation uiTestDependencies.espressoCore

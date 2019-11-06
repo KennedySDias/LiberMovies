@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -38,17 +40,22 @@ dependencies {
     implementation project(path: ':common')
 
     // Main Application dependencies
-    implementation mainApplicationDependencies.koinAndroid
-    implementation mainApplicationDependencies.koinAndroidScope
-    implementation mainApplicationDependencies.koinAndroidViewModel
+    implementation mainApplicationDependencies.koinCore
+    implementation mainApplicationDependencies.koinAndroidXScope
+    implementation mainApplicationDependencies.koinAndroidXViewModel
     implementation mainApplicationDependencies.kotlinCoroutinesCore
     implementation mainApplicationDependencies.kotlinCoroutinesAndroid
     implementation mainApplicationDependencies.gson
     implementation mainApplicationDependencies.retrofit
     implementation mainApplicationDependencies.retrofitConverterGson
+    implementation mainApplicationDependencies.RoomRuntime
+    implementation mainApplicationDependencies.RoomKtx
+    kapt mainApplicationDependencies.RoomCompiler
 
     // Unit tests dependencies
     testImplementation unitTestDependencies.junit
+    testImplementation unitTestDependencies.koinTest
+    testImplementation unitTestDependencies.RoomTesting
 
     // UI tests dependencies
     androidTestImplementation uiTestDependencies.espressoCore
