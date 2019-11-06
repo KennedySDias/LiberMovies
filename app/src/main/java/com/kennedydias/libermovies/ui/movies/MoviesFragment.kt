@@ -11,6 +11,7 @@ import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.ui.base.BaseFragment
 import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
 import com.kennedydias.commom.extensions.observe
+import com.kennedydias.domain.model.MovieShortData
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -94,11 +95,11 @@ class MoviesFragment : BaseFragment() {
         })
     }
 
-    private fun handleMoviesList(list: List<MovieData>) {
+    private fun handleMoviesList(list: List<MovieShortData>) {
         moviesAdapter.updateAll(list)
     }
 
-    private fun handleSeriesList(list: List<MovieData>) {
+    private fun handleSeriesList(list: List<MovieShortData>) {
         seriesAdapter.updateAll(list)
     }
 

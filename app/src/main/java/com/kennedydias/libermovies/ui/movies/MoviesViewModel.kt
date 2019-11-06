@@ -2,10 +2,11 @@ package com.kennedydias.libermovies.ui.movies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kennedydias.domain.usecase.GetMoviesListUseCase
-import com.kennedydias.domain.usecase.GetSeriesListUseCase
 import com.kennedydias.commom.expection.NotConnectedException
 import com.kennedydias.commom.expection.UnauthorizedException
+import com.kennedydias.domain.model.MovieShortData
+import com.kennedydias.domain.usecase.GetMoviesListUseCase
+import com.kennedydias.domain.usecase.GetSeriesListUseCase
 import java.util.concurrent.TimeoutException
 
 class MoviesViewModel(
@@ -13,8 +14,8 @@ class MoviesViewModel(
     private val seriesListUseCase: GetSeriesListUseCase
 ) : ViewModel() {
 
-    val moviesOb = MutableLiveData<List<MovieData>>()
-    val seriesOb = MutableLiveData<List<MovieData>>()
+    val moviesOb = MutableLiveData<List<MovieShortData>>()
+    val seriesOb = MutableLiveData<List<MovieShortData>>()
     val errorOb = MutableLiveData<String>()
     val fatalErrorOb = MutableLiveData<String>()
     val notConnectedOb = MutableLiveData<Boolean>()
@@ -37,9 +38,7 @@ class MoviesViewModel(
 
             onComplete {
                 gettingMoviesOb.value = false
-                moviesOb.value = it.search?.map { movie ->
-                    MovieData.fromMoviesShortResponseModel(movie)
-                } ?: emptyList()
+                moviesOb.value = it
             }
 
             onError { error ->
@@ -76,9 +75,7 @@ class MoviesViewModel(
 
             onComplete {
                 gettingSeriesOb.value = false
-                seriesOb.value = it.search?.map { movie ->
-                    MovieData.fromMoviesShortResponseModel(movie)
-                } ?: emptyList()
+                seriesOb.value = it
             }
 
             onError { error ->
