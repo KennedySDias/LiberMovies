@@ -11,7 +11,7 @@ import com.kennedydias.libermovies.databinding.ListItemMoviesBinding
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    val movies: MutableList<MovieShortData> = mutableListOf()
+    private val movies: MutableList<MovieShortData> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(

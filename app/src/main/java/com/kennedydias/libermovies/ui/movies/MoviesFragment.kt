@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kennedydias.libermovies.R
-import com.kennedydias.libermovies.ui.base.BaseFragment
-import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
 import com.kennedydias.commom.extensions.observe
 import com.kennedydias.domain.model.MovieShortData
+import com.kennedydias.libermovies.R
+import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
+import com.kennedydias.libermovies.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -93,6 +93,8 @@ class MoviesFragment : BaseFragment() {
             }
 
         })
+        searchView.setQuery("Marvel", true)
+        searchView.clearFocus()
     }
 
     private fun handleMoviesList(list: List<MovieShortData>) {
