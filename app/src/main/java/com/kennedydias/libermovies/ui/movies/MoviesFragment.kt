@@ -132,7 +132,7 @@ class MoviesFragment : BaseFragment() {
             }
 
         })
-        searchView.setQuery("Marvel", true)
+        searchView.setQuery(viewModel.getInitialSearch(), true)
         searchView.clearFocus()
     }
 

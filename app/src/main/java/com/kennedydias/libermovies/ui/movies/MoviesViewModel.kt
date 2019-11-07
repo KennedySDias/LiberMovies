@@ -21,6 +21,7 @@ class MoviesViewModel(
     val notConnectedOb = MutableLiveData<Boolean>()
     val gettingDataOb = MutableLiveData<Boolean>()
     val seeMoreOb = MutableLiveData<MovieShortData>()
+    val initialSearchList = listOf("Marvel", "Comics", "Disney", "Pokémon", "Super", "Anime")
 
     var searchOb: String? = null
 
@@ -105,6 +106,10 @@ class MoviesViewModel(
 
     fun seeMore(movie: MovieShortData) {
         seeMoreOb.value = movie
+    }
+
+    fun getInitialSearch(): String {
+        return initialSearchList.random()
     }
 
 }
