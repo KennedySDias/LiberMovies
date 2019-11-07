@@ -51,11 +51,11 @@ class MoviesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configureSearchView()
         viewModel.init()
     }
 
     private fun configureComponents() {
+        configureSearchView()
         configureMoviesRecyclerView()
         configureSeriesRecyclerView()
     }
@@ -119,7 +119,7 @@ class MoviesFragment : BaseFragment() {
     }
 
     private fun configureSearchView() {
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.searchOb = newText
@@ -132,8 +132,8 @@ class MoviesFragment : BaseFragment() {
             }
 
         })
-        searchView.setQuery(viewModel.getInitialSearch(), true)
-        searchView.clearFocus()
+        binding.searchView.setQuery(viewModel.getInitialSearch(), true)
+        binding.searchView.clearFocus()
     }
 
     private fun handleMoviesList(list: List<MovieShortData>) {
