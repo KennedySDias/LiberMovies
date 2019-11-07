@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.kennedydias.commom.extensions.observe
 import com.kennedydias.domain.model.MovieShortData
 import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
+import com.kennedydias.libermovies.listener.OnSnapPositionChangeListener
 import com.kennedydias.libermovies.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -70,17 +72,51 @@ class MoviesFragment : BaseFragment() {
     }
 
     private fun configureMoviesRecyclerView() {
+        // Configure adapter
         binding.recyclerViewMovies.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = moviesAdapter
         }
+
+        // Configure Snap Animation
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerViewMovies)
+
+        val onSnapPositionChangeListener = object : OnSnapPositionChangeListener {
+            override fun onSnapPositionChange(position: Int) {
+                moviesAdapter.focusAnimation(position)
+            }
+        }
+
+        val snapOnScrollListener = SnapOnScrollListener(
+            snapHelper = snapHelper,
+            onSnapPositionChangeListener = onSnapPositionChangeListener
+        )
+        binding.recyclerViewMovies.addOnScrollListener(snapOnScrollListener)
     }
 
     private fun configureSeriesRecyclerView() {
+        // Configure adapter
         binding.recyclerViewSeries.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = seriesAdapter
         }
+
+        // Configure Snap Animation
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerViewSeries)
+
+        val onSnapPositionChangeListener = object : OnSnapPositionChangeListener {
+            override fun onSnapPositionChange(position: Int) {
+                seriesAdapter.focusAnimation(position)
+            }
+        }
+
+        val snapOnScrollListener = SnapOnScrollListener(
+            snapHelper = snapHelper,
+            onSnapPositionChangeListener = onSnapPositionChangeListener
+        )
+        binding.recyclerViewSeries.addOnScrollListener(snapOnScrollListener)
     }
 
     private fun configureSearchView() {
