@@ -33,6 +33,17 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
+            <ImageView
+                android:id="@+id/imageViewFilterMovies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/filter_movies_list"
+                android:onClick="@{() -> viewModel.openMoviesFilter()}"
+                android:src="@drawable/ic_more_vert"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLabelMovie"
+                app:layout_constraintEnd_toEndOf="@+id/textViewLabelMovie"
+                app:layout_constraintTop_toTopOf="@+id/textViewLabelMovie" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMovies"
                 android:layout_width="match_parent"
@@ -50,6 +61,17 @@
                 android:text="@string/series"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewMovies" />
+
+            <ImageView
+                android:id="@+id/imageViewFilterSeries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/filter_series_list"
+                android:onClick="@{() -> viewModel.openSeriesFilter()}"
+                android:src="@drawable/ic_more_vert"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLabelSeries"
+                app:layout_constraintEnd_toEndOf="@+id/textViewLabelSeries"
+                app:layout_constraintTop_toTopOf="@+id/textViewLabelSeries" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSeries"
