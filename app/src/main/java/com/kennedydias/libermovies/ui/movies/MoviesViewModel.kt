@@ -19,8 +19,9 @@ class MoviesViewModel(
     val errorOb = MutableLiveData<String>()
     val fatalErrorOb = MutableLiveData<String>()
     val notConnectedOb = MutableLiveData<Boolean>()
-    val gettingMoviesOb = MutableLiveData<Boolean>()
-    val gettingSeriesOb = MutableLiveData<Boolean>()
+    val gettingDataOb = MutableLiveData<Boolean>()
+    val seeMoreOb = MutableLiveData<MovieShortData>()
+    val initialSearchList = listOf("Marvel", "Comics", "Disney", "Pokémon", "Super", "Anime")
 
     var searchOb: String? = null
 
@@ -31,18 +32,18 @@ class MoviesViewModel(
 
     fun getMovies() {
         notConnectedOb.value = false
-        gettingMoviesOb.value = true
+        gettingDataOb.value = true
 
         moviesListUseCase.search = searchOb
         moviesListUseCase.execute {
 
             onComplete {
-                gettingMoviesOb.value = false
+                gettingDataOb.value = false
                 moviesOb.value = it
             }
 
             onError { error ->
-                gettingMoviesOb.value = false
+                gettingDataOb.value = false
                 when (error) {
                     is UnauthorizedException -> {
                         fatalErrorOb.value = error.message
@@ -60,7 +61,7 @@ class MoviesViewModel(
             }
 
             onCancel { throwable ->
-                gettingMoviesOb.value = false
+                gettingDataOb.value = false
             }
 
         }
@@ -68,18 +69,18 @@ class MoviesViewModel(
 
     fun getSeries() {
         notConnectedOb.value = false
-        gettingSeriesOb.value = true
+        gettingDataOb.value = true
 
         seriesListUseCase.search = searchOb
         seriesListUseCase.execute {
 
             onComplete {
-                gettingSeriesOb.value = false
+                gettingDataOb.value = false
                 seriesOb.value = it
             }
 
             onError { error ->
-                gettingSeriesOb.value = false
+                gettingDataOb.value = false
                 when (error) {
                     is UnauthorizedException -> {
                         fatalErrorOb.value = error.message
@@ -97,10 +98,18 @@ class MoviesViewModel(
             }
 
             onCancel { throwable ->
-                gettingSeriesOb.value = false
+                gettingDataOb.value = false
             }
 
         }
+    }
+
+    fun seeMore(movie: MovieShortData) {
+        seeMoreOb.value = movie
+    }
+
+    fun getInitialSearch(): String {
+        return initialSearchList.random()
     }
 
 }

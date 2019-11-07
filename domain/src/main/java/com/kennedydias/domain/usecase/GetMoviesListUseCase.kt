@@ -14,12 +14,16 @@ class GetMoviesListUseCase(
     var page: Int? = null
 
     override suspend fun executeOnBackground(): List<MovieShortData> {
-        return moviesRepository.getMoviesList(
+        val response = moviesRepository.getMoviesList(
             search = search,
             type = "movie",
             year = year,
             page = page
-        ).search?.map { movieMapper.mapShort(it) } ?: listOf()
+        )
+
+        if (response.error?.isNotEmpty() == true) throw Exception(response.error)
+
+        return response.search?.map { movieMapper.mapShort(it) } ?: listOf()
     }
 
 }

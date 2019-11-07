@@ -7,19 +7,21 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kennedydias.libermovies.R
-import com.kennedydias.libermovies.ui.base.BaseFragment
-import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.kennedydias.commom.extensions.observe
 import com.kennedydias.domain.model.MovieShortData
+import com.kennedydias.libermovies.R
+import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
+import com.kennedydias.libermovies.listener.OnSnapPositionChangeListener
+import com.kennedydias.libermovies.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMoviesBinding
-    private var moviesAdapter = MoviesAdapter()
-    private var seriesAdapter = MoviesAdapter()
+    private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var seriesAdapter: MoviesAdapter
     private val viewModel by viewModel<MoviesViewModel>()
 
     override fun onBackPressed(): Boolean {
@@ -35,6 +37,9 @@ class MoviesFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        moviesAdapter = MoviesAdapter(viewModel)
+        seriesAdapter = MoviesAdapter(viewModel)
 
         val view = binding.root
 
@@ -61,22 +66,56 @@ class MoviesFragment : BaseFragment() {
         observe(viewModel.errorOb, ::handleError)
         observe(viewModel.fatalErrorOb, ::handleFatalError)
         observe(viewModel.notConnectedOb, ::handleNotConnected)
-        observe(viewModel.gettingMoviesOb, ::handleGettingMovies)
-        observe(viewModel.gettingSeriesOb, ::handleGettingSeries)
+        observe(viewModel.gettingDataOb, ::handleGettingData)
+        observe(viewModel.seeMoreOb, ::handleSeeMore)
     }
 
     private fun configureMoviesRecyclerView() {
+        // Configure adapter
         binding.recyclerViewMovies.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = moviesAdapter
         }
+
+        // Configure Snap Animation
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerViewMovies)
+
+        val onSnapPositionChangeListener = object : OnSnapPositionChangeListener {
+            override fun onSnapPositionChange(position: Int) {
+                moviesAdapter.focusAnimation(position)
+            }
+        }
+
+        val snapOnScrollListener = SnapOnScrollListener(
+            snapHelper = snapHelper,
+            onSnapPositionChangeListener = onSnapPositionChangeListener
+        )
+        binding.recyclerViewMovies.addOnScrollListener(snapOnScrollListener)
     }
 
     private fun configureSeriesRecyclerView() {
+        // Configure adapter
         binding.recyclerViewSeries.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = seriesAdapter
         }
+
+        // Configure Snap Animation
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerViewSeries)
+
+        val onSnapPositionChangeListener = object : OnSnapPositionChangeListener {
+            override fun onSnapPositionChange(position: Int) {
+                seriesAdapter.focusAnimation(position)
+            }
+        }
+
+        val snapOnScrollListener = SnapOnScrollListener(
+            snapHelper = snapHelper,
+            onSnapPositionChangeListener = onSnapPositionChangeListener
+        )
+        binding.recyclerViewSeries.addOnScrollListener(snapOnScrollListener)
     }
 
     private fun configureSearchView() {
@@ -93,6 +132,8 @@ class MoviesFragment : BaseFragment() {
             }
 
         })
+        searchView.setQuery(viewModel.getInitialSearch(), true)
+        searchView.clearFocus()
     }
 
     private fun handleMoviesList(list: List<MovieShortData>) {
@@ -122,20 +163,12 @@ class MoviesFragment : BaseFragment() {
         }
     }
 
-    private fun handleGettingMovies(notConnected: Boolean) {
-        if (notConnected) {
-            // TODO implement in layout
-        } else {
-            // TODO implement in layout
-        }
+    private fun handleGettingData(loading: Boolean) {
+        constraintLayoutLoading.visibility = if (loading) View.VISIBLE else View.GONE
     }
 
-    private fun handleGettingSeries(notConnected: Boolean) {
-        if (notConnected) {
-            // TODO implement in layout
-        } else {
-            // TODO implement in layout
-        }
+    private fun handleSeeMore(movie: MovieShortData) {
+        // TODO
     }
 
     companion object {
