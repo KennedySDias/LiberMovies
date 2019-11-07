@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,11 +52,11 @@ class MoviesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configureSearchView()
         viewModel.init()
     }
 
     private fun configureComponents() {
+        configureSearchView()
         configureMoviesRecyclerView()
         configureSeriesRecyclerView()
     }
@@ -68,6 +69,8 @@ class MoviesFragment : BaseFragment() {
         observe(viewModel.notConnectedOb, ::handleNotConnected)
         observe(viewModel.gettingDataOb, ::handleGettingData)
         observe(viewModel.seeMoreOb, ::handleSeeMore)
+        observe(viewModel.openMoviesFilterOb, ::openMoviesFilter)
+        observe(viewModel.openSeriesFilterOb, ::openSeriesFilter)
     }
 
     private fun configureMoviesRecyclerView() {
@@ -119,7 +122,7 @@ class MoviesFragment : BaseFragment() {
     }
 
     private fun configureSearchView() {
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.searchOb = newText
@@ -132,8 +135,8 @@ class MoviesFragment : BaseFragment() {
             }
 
         })
-        searchView.setQuery(viewModel.getInitialSearch(), true)
-        searchView.clearFocus()
+        binding.searchView.setQuery(viewModel.getInitialSearch(), true)
+        binding.searchView.clearFocus()
     }
 
     private fun handleMoviesList(list: List<MovieShortData>) {
@@ -169,6 +172,44 @@ class MoviesFragment : BaseFragment() {
 
     private fun handleSeeMore(movie: MovieShortData) {
         // TODO
+    }
+
+    private fun openMoviesFilter(open: Boolean) {
+        if (open) {
+            openFilterPopup(binding.imageViewFilterMovies) { itemId ->
+                when (itemId) {
+                    R.id.filter_by_name -> viewModel.filterMoviesByName()
+                    R.id.filter_by_year -> viewModel.filterMoviesByYear()
+                    R.id.filter_by_relevance -> viewModel.filterMoviesByRelevance()
+                }
+            }
+        }
+    }
+
+    private fun openSeriesFilter(open: Boolean) {
+        if (open) {
+            openFilterPopup(binding.imageViewFilterSeries) { itemId ->
+                when (itemId) {
+                    R.id.filter_by_name -> viewModel.filterSeriesByName()
+                    R.id.filter_by_year -> viewModel.filterSeriesByYear()
+                    R.id.filter_by_relevance -> viewModel.filterSeriesByRelevance()
+                }
+            }
+        }
+    }
+
+    private fun openFilterPopup(anchorView: View, callback: (itemId: Int) -> Unit) {
+        context?.let { context ->
+            val popup = PopupMenu(context, anchorView)
+            popup.menuInflater.inflate(R.menu.popup_filters, popup.menu)
+
+            popup.setOnMenuItemClickListener { item ->
+                callback(item.itemId)
+                return@setOnMenuItemClickListener true
+            }
+
+            popup.show()
+        }
     }
 
     companion object {

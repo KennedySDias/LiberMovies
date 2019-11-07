@@ -14,6 +14,11 @@ class MoviesViewModel(
     private val seriesListUseCase: GetSeriesListUseCase
 ) : ViewModel() {
 
+    private var moviesOriginalFilterOb = listOf<MovieShortData>()
+    private var seriesOriginalFilterOb = listOf<MovieShortData>()
+    private val initialSearchList =
+        listOf("Marvel", "Comics", "Disney", "Pokémon", "Super", "Anime")
+
     val moviesOb = MutableLiveData<List<MovieShortData>>()
     val seriesOb = MutableLiveData<List<MovieShortData>>()
     val errorOb = MutableLiveData<String>()
@@ -21,7 +26,8 @@ class MoviesViewModel(
     val notConnectedOb = MutableLiveData<Boolean>()
     val gettingDataOb = MutableLiveData<Boolean>()
     val seeMoreOb = MutableLiveData<MovieShortData>()
-    val initialSearchList = listOf("Marvel", "Comics", "Disney", "Pokémon", "Super", "Anime")
+    val openMoviesFilterOb = MutableLiveData<Boolean>()
+    val openSeriesFilterOb = MutableLiveData<Boolean>()
 
     var searchOb: String? = null
 
@@ -40,6 +46,7 @@ class MoviesViewModel(
             onComplete {
                 gettingDataOb.value = false
                 moviesOb.value = it
+                moviesOriginalFilterOb = moviesOb.value ?: emptyList()
             }
 
             onError { error ->
@@ -77,6 +84,7 @@ class MoviesViewModel(
             onComplete {
                 gettingDataOb.value = false
                 seriesOb.value = it
+                seriesOriginalFilterOb = seriesOb.value ?: emptyList()
             }
 
             onError { error ->
@@ -108,8 +116,66 @@ class MoviesViewModel(
         seeMoreOb.value = movie
     }
 
+    fun openMoviesFilter() {
+        openMoviesFilterOb.value = true
+    }
+
     fun getInitialSearch(): String {
         return initialSearchList.random()
+    }
+
+    fun filterMoviesByName() {
+        moviesOb.value = moviesOb.value?.sortedBy { it.title }
+    }
+
+    fun filterMoviesByYear() {
+        moviesOb.value = moviesOb.value?.sortedBy {
+            try {
+                it.year.toInt()
+            } catch (e: NumberFormatException) {
+                0
+            }
+        }
+    }
+
+    fun filterMoviesByRelevance() {
+        if (moviesOriginalFilterOb.isNotEmpty()) {
+            moviesOb.value = moviesOriginalFilterOb
+        }
+    }
+
+    fun openSeriesFilter() {
+        openSeriesFilterOb.value = true
+    }
+
+    fun filterSeriesByName() {
+        seriesOb.value = seriesOb.value?.sortedBy { it.title }
+    }
+
+    fun filterSeriesByYear() {
+        seriesOb.value = seriesOb.value?.sortedBy {
+            try {
+                /**
+                 *  Get the start year from series
+                 *  EX: some cases came as "1999-" or "2000" or "2000-2006"
+                 *
+                 *  So I used an regex expression to get it
+                 */
+                getStartYearFromSeries(it.year)
+            } catch (e: NumberFormatException) {
+                0
+            }
+        }
+    }
+
+    fun filterSeriesByRelevance() {
+        if (seriesOriginalFilterOb.isNotEmpty()) {
+            seriesOb.value = seriesOriginalFilterOb
+        }
+    }
+
+    private fun getStartYearFromSeries(year: String): Int {
+        return Regex("^[^;–]*").find(year)?.value.toString().toInt()
     }
 
 }

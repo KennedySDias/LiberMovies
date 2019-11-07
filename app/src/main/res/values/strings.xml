@@ -5,4 +5,9 @@
     <string name="series">Series</string>
     <string name="explore">Explore</string>
     <string name="favorite">Favorite</string>
+    <string name="filter_by_name">Filter by Name</string>
+    <string name="filter_by_year">Filter by Year</string>
+    <string name="filter_by_relevance">Filter by Relevance</string>
+    <string name="filter_movies_list">Filter movies list</string>
+    <string name="filter_series_list">Filter series list</string>
 </resources>
