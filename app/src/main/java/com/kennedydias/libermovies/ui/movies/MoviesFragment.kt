@@ -66,8 +66,7 @@ class MoviesFragment : BaseFragment() {
         observe(viewModel.errorOb, ::handleError)
         observe(viewModel.fatalErrorOb, ::handleFatalError)
         observe(viewModel.notConnectedOb, ::handleNotConnected)
-        observe(viewModel.gettingMoviesOb, ::handleGettingMovies)
-        observe(viewModel.gettingSeriesOb, ::handleGettingSeries)
+        observe(viewModel.gettingDataOb, ::handleGettingData)
         observe(viewModel.seeMoreOb, ::handleSeeMore)
     }
 
@@ -164,20 +163,8 @@ class MoviesFragment : BaseFragment() {
         }
     }
 
-    private fun handleGettingMovies(notConnected: Boolean) {
-        if (notConnected) {
-            // TODO implement in layout
-        } else {
-            // TODO implement in layout
-        }
-    }
-
-    private fun handleGettingSeries(notConnected: Boolean) {
-        if (notConnected) {
-            // TODO implement in layout
-        } else {
-            // TODO implement in layout
-        }
+    private fun handleGettingData(loading: Boolean) {
+        constraintLayoutLoading.visibility = if (loading) View.VISIBLE else View.GONE
     }
 
     private fun handleSeeMore(movie: MovieShortData) {

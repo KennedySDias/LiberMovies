@@ -12,4 +12,6 @@
     <color name="colorShapeBackground">#FFFFFF</color>
 
     <color name="colorPlaceholder">#DBDBDB</color>
+
+    <color name="colorLoadingBackground">#E2FFFFFF</color>
 </resources>
