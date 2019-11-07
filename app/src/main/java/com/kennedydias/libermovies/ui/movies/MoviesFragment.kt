@@ -1,5 +1,6 @@
 package com.kennedydias.libermovies.ui.movies
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
 import com.kennedydias.libermovies.listener.OnSnapPositionChangeListener
 import com.kennedydias.libermovies.ui.base.BaseFragment
+import com.kennedydias.libermovies.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -171,7 +173,8 @@ class MoviesFragment : BaseFragment() {
     }
 
     private fun handleSeeMore(movie: MovieShortData) {
-        // TODO
+        val newIntent = Intent(context, DetailsActivity::class.java)
+        startActivity(newIntent)
     }
 
     private fun openMoviesFilter(open: Boolean) {
