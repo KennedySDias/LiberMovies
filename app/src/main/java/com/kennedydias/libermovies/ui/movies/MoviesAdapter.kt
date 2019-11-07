@@ -9,7 +9,9 @@ import com.kennedydias.domain.model.MovieShortData
 import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.databinding.ListItemMoviesBinding
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(
+    private val viewModel: MoviesViewModel
+) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     private val movies: MutableList<MovieShortData> = mutableListOf()
 
@@ -27,6 +29,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         val binding = holder.binding
+        binding?.viewModel = viewModel
         binding?.movie = movies[position]
         binding?.executePendingBindings()
     }

@@ -18,8 +18,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MoviesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMoviesBinding
-    private var moviesAdapter = MoviesAdapter()
-    private var seriesAdapter = MoviesAdapter()
+    private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var seriesAdapter: MoviesAdapter
     private val viewModel by viewModel<MoviesViewModel>()
 
     override fun onBackPressed(): Boolean {
@@ -35,6 +35,9 @@ class MoviesFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        moviesAdapter = MoviesAdapter(viewModel)
+        seriesAdapter = MoviesAdapter(viewModel)
 
         val view = binding.root
 
@@ -63,6 +66,7 @@ class MoviesFragment : BaseFragment() {
         observe(viewModel.notConnectedOb, ::handleNotConnected)
         observe(viewModel.gettingMoviesOb, ::handleGettingMovies)
         observe(viewModel.gettingSeriesOb, ::handleGettingSeries)
+        observe(viewModel.seeMoreOb, ::handleSeeMore)
     }
 
     private fun configureMoviesRecyclerView() {
@@ -138,6 +142,10 @@ class MoviesFragment : BaseFragment() {
         } else {
             // TODO implement in layout
         }
+    }
+
+    private fun handleSeeMore(movie: MovieShortData) {
+        // TODO
     }
 
     companion object {

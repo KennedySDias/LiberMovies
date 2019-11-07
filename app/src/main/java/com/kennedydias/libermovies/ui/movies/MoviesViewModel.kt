@@ -21,6 +21,7 @@ class MoviesViewModel(
     val notConnectedOb = MutableLiveData<Boolean>()
     val gettingMoviesOb = MutableLiveData<Boolean>()
     val gettingSeriesOb = MutableLiveData<Boolean>()
+    val seeMoreOb = MutableLiveData<MovieShortData>()
 
     var searchOb: String? = null
 
@@ -101,6 +102,10 @@ class MoviesViewModel(
             }
 
         }
+    }
+
+    fun seeMore(movie: MovieShortData) {
+        seeMoreOb.value = movie
     }
 
 }
