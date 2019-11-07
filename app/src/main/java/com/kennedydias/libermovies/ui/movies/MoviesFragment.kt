@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,6 +69,8 @@ class MoviesFragment : BaseFragment() {
         observe(viewModel.notConnectedOb, ::handleNotConnected)
         observe(viewModel.gettingDataOb, ::handleGettingData)
         observe(viewModel.seeMoreOb, ::handleSeeMore)
+        observe(viewModel.openMoviesFilterOb, ::openMoviesFilter)
+        observe(viewModel.openSeriesFilterOb, ::openSeriesFilter)
     }
 
     private fun configureMoviesRecyclerView() {
@@ -169,6 +172,44 @@ class MoviesFragment : BaseFragment() {
 
     private fun handleSeeMore(movie: MovieShortData) {
         // TODO
+    }
+
+    private fun openMoviesFilter(open: Boolean) {
+        if (open) {
+            openFilterPopup(binding.imageViewFilterMovies) { itemId ->
+                when (itemId) {
+                    R.id.filter_by_name -> viewModel.filterMoviesByName()
+                    R.id.filter_by_year -> viewModel.filterMoviesByYear()
+                    R.id.filter_by_relevance -> viewModel.filterMoviesByRelevance()
+                }
+            }
+        }
+    }
+
+    private fun openSeriesFilter(open: Boolean) {
+        if (open) {
+            openFilterPopup(binding.imageViewFilterSeries) { itemId ->
+                when (itemId) {
+                    R.id.filter_by_name -> viewModel.filterSeriesByName()
+                    R.id.filter_by_year -> viewModel.filterSeriesByYear()
+                    R.id.filter_by_relevance -> viewModel.filterSeriesByRelevance()
+                }
+            }
+        }
+    }
+
+    private fun openFilterPopup(anchorView: View, callback: (itemId: Int) -> Unit) {
+        context?.let { context ->
+            val popup = PopupMenu(context, anchorView)
+            popup.menuInflater.inflate(R.menu.popup_filters, popup.menu)
+
+            popup.setOnMenuItemClickListener { item ->
+                callback(item.itemId)
+                return@setOnMenuItemClickListener true
+            }
+
+            popup.show()
+        }
     }
 
     companion object {
