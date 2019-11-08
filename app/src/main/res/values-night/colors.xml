@@ -12,4 +12,6 @@
     <color name="colorPlaceholder">#1E1E1E</color>
 
     <color name="colorLoadingBackground">#C91E1E1E</color>
+
+    <color name="colorFilterIcon">#E2E0E0E0</color>
 </resources>

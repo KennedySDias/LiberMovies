@@ -12,4 +12,6 @@
     <color name="colorPlaceholder">#DBDBDB</color>
 
     <color name="colorLoadingBackground">#E2FFFFFF</color>
+
+    <color name="colorFilterIcon">#E22E2E2E</color>
 </resources>

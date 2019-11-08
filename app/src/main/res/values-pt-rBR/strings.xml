@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">LiberMovies</string>
+    <string name="search">Buscar</string>
+    <string name="movies">Filmes</string>
+    <string name="series">Séries</string>
+    <string name="explore">Explore</string>
+    <string name="filter_by_name">Filtrar por Nome</string>
+    <string name="filter_by_year">Filtrar por Ano</string>
+    <string name="filter_by_relevance">Filtrar por Relevância</string>
+    <string name="filter_movies_list">Filtrar filmes</string>
+    <string name="filter_series_list">Filtrar Séries</string>
+    <string name="story">Resumo</string>
+    <string name="cast">Elenco</string>
+    <string name="movie_is_missing">Sem filme</string>
+    <string name="favorites">Favoritos</string>
+</resources>
