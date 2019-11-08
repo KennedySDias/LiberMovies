@@ -65,5 +65,14 @@ class MovieMapper : KoinComponent {
         }
     }
 
+    fun mapToShortModel(movie: MovieFullData): MovieShortModel {
+        return MovieShortModel(
+            imdbID = movie.imdbID ?: "",
+            title = movie.title ?: "",
+            year = movie.year ?: "",
+            type = movie.type ?: "",
+            poster = movie.poster ?: ""
+        )
+    }
 
 }

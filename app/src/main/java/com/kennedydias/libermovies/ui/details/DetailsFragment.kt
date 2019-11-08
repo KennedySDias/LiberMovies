@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.kennedydias.commom.extensions.observe
 import com.kennedydias.domain.model.MovieShortData
@@ -72,6 +73,7 @@ class DetailsFragment : BaseFragment() {
         observe(viewModel.errorOb, ::handleError)
         observe(viewModel.notConnectedOb, ::handleNotConnected)
         observe(viewModel.gettingDataOb, ::handleGettingData)
+        observe(viewModel.isFavorite, ::handleIsFavorite)
     }
 
     private fun handleFatalError(message: String) {
@@ -100,6 +102,26 @@ class DetailsFragment : BaseFragment() {
         } else {
             binding.progressBar.visibility = View.GONE
             binding.groupMovieData.visibility = View.VISIBLE
+        }
+    }
+
+    private fun handleIsFavorite(isFavorite: Boolean) {
+        context?.let { context ->
+            if (isFavorite) {
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_favorite
+                    )
+                )
+            } else {
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_favorite_border
+                    )
+                )
+            }
         }
     }
 

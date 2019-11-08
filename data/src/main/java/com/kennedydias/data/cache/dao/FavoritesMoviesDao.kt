@@ -12,6 +12,9 @@ interface FavoritesMoviesDao {
     @Query(value = "SELECT * FROM favorite_movies")
     suspend fun getFavoritesMovies(): List<MovieShortModel>
 
+    @Query(value = "SELECT * FROM favorite_movies WHERE favorite_movies.imdbID IS :imdbID")
+    suspend fun getFavoriteMovie(imdbID: String): List<MovieShortModel>
+
     @Insert
     suspend fun insertFavoriteMovie(movie: MovieShortModel)
 
