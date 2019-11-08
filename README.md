@@ -26,12 +26,12 @@ https://github.com/KennedySDias/LiberMovies/blob/82c63050a4f8c564e3b35401a0ee70b
 
 ## Imagens
 
-Default Mode theme <br>
+Default theme <br>
 <img src="images/01.png" width="250">
 <img src="images/02.png" width="250">
 <img src="images/03.png" width="250">
 <br>
-Dark Mode Theme <br>
+Dark Theme <br>
 <img src="images/04.png" width="250">
 <img src="images/05.png" width="250">
 <img src="images/06.png" width="250">
