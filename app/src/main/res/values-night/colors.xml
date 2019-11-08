@@ -4,12 +4,12 @@
     <color name="colorPrimaryDark">#0076BE</color>
     <color name="colorAccent">#73C664</color>
 
-    <color name="colorBottomNavigationViewBackground">#FFFFFF</color>
-    <color name="colorBottomNavigationViewIconTint">@color/colorPrimary</color>
-    <color name="colorBottomNavigationViewTextColor">@color/colorPrimary</color>
+    <color name="colorBottomNavigationViewBackground">#1E1E1E</color>
 
-    <color name="colorScreenBackground">#E7E8ED</color>
-    <color name="colorShapeBackground">#FFFFFF</color>
+    <color name="colorScreenBackground">#121212</color>
+    <color name="colorShapeBackground">#1E1E1E</color>
 
-    <color name="colorPlaceholder">#DBDBDB</color>
+    <color name="colorPlaceholder">#1E1E1E</color>
+
+    <color name="colorLoadingBackground">#C91E1E1E</color>
 </resources>
