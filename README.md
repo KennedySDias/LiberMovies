@@ -18,6 +18,6 @@ Também utilizando algumas bibliotecas como:
 O aplicativo foi desenvolvido utilizando a linguagem Kotlin e toda as comunições entre as camadas são feitas através de Coroutines.
 
 
-# Como utilizar
+## Como utilizar
 
 Insira a sua API_KEY do OMDB no arquivo `build.gradle` do módulo `Data`.
