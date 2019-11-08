@@ -5,8 +5,6 @@
     <color name="colorAccent">#73C664</color>
 
     <color name="colorBottomNavigationViewBackground">#FFFFFF</color>
-    <color name="colorBottomNavigationViewIconTint">@color/colorPrimary</color>
-    <color name="colorBottomNavigationViewTextColor">@color/colorPrimary</color>
 
     <color name="colorScreenBackground">#E7E8ED</color>
     <color name="colorShapeBackground">#FFFFFF</color>
@@ -14,4 +12,6 @@
     <color name="colorPlaceholder">#DBDBDB</color>
 
     <color name="colorLoadingBackground">#E2FFFFFF</color>
+
+    <color name="colorFilterIcon">#E22E2E2E</color>
 </resources>
