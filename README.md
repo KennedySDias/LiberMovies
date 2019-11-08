@@ -20,7 +20,8 @@ O aplicativo foi desenvolvido utilizando a linguagem Kotlin e toda as comuniçõ
 
 ## Como utilizar
 
-Insira a sua API_KEY do OMDB no arquivo `build.gradle` do módulo `Data`.
+Insira a sua API_KEY do OMDB no arquivo `build.gradle` do módulo `Data`. 
+https://github.com/KennedySDias/LiberMovies/blob/82c63050a4f8c564e3b35401a0ee70b417428012/data/build.gradle#L25
 
 
 ## Imagens
