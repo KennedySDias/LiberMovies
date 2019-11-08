@@ -1,6 +1,5 @@
 package com.kennedydias.libermovies.ui.details
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,13 +7,19 @@ import com.kennedydias.commom.expection.NotConnectedException
 import com.kennedydias.commom.expection.UnauthorizedException
 import com.kennedydias.domain.model.MovieFullData
 import com.kennedydias.domain.model.MovieShortData
+import com.kennedydias.domain.usecase.GetFavoriteMovieUseCase
 import com.kennedydias.domain.usecase.GetMovieDetailsUseCase
+import com.kennedydias.domain.usecase.RemoveFavoriteMovieUseCase
+import com.kennedydias.domain.usecase.SaveFavoriteMovieUseCase
 import com.kennedydias.libermovies.R
 import com.kennedydias.libermovies.utils.ResourcesUtils
 import java.util.concurrent.TimeoutException
 
 class DetailsViewModel(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
+    private val getFavoriteMovieUseCase: GetFavoriteMovieUseCase,
+    private val saveFavoriteMovieUseCase: SaveFavoriteMovieUseCase,
+    private val removeFavoriteMovieUseCase: RemoveFavoriteMovieUseCase,
     private val resourcesUtils: ResourcesUtils
 ) : ViewModel() {
 
@@ -23,6 +28,7 @@ class DetailsViewModel(
     val fatalErrorOb = MutableLiveData<String>()
     val notConnectedOb = MutableLiveData<Boolean>()
     val gettingDataOb = MutableLiveData<Boolean>()
+    val isFavorite = MutableLiveData<Boolean>()
 
     fun init(arguments: Bundle?) {
         val movieShortData =
@@ -38,6 +44,7 @@ class DetailsViewModel(
             )
 
             getDetails()
+            getFavorite()
         } else {
             fatalErrorOb.value = resourcesUtils.getString(R.string.movie_is_missing)
         }
@@ -80,8 +87,61 @@ class DetailsViewModel(
         }
     }
 
-    fun getFavoriteIcon(): Drawable? {
-        return resourcesUtils.getDrawable(R.drawable.ic_favorite)
+    fun addOrRemoveFavorite() {
+        if (isFavorite.value == true) {
+            removeFromFavorites()
+        } else {
+            saveAsFavorite()
+        }
+    }
+
+    private fun getFavorite() {
+        getFavoriteMovieUseCase.imdbId = movieOb.value?.imdbID
+        getFavoriteMovieUseCase.execute {
+
+            onComplete {
+                isFavorite.value = it != null
+            }
+
+            onError { error ->
+                errorOb.value = error.message
+            }
+
+        }
+    }
+
+    private fun saveAsFavorite() {
+        movieOb.value?.let { movie ->
+            saveFavoriteMovieUseCase.movie = movie
+            saveFavoriteMovieUseCase.execute {
+
+                onComplete {
+                    getFavorite()
+                }
+
+                onError { error ->
+                    errorOb.value = error.message
+                }
+
+            }
+        }
+    }
+
+    private fun removeFromFavorites() {
+        movieOb.value?.let { movie ->
+            removeFavoriteMovieUseCase.movie = movie
+            removeFavoriteMovieUseCase.execute {
+
+                onComplete {
+                    getFavorite()
+                }
+
+                onError { error ->
+                    errorOb.value = error.message
+                }
+
+            }
+        }
     }
 
 }
