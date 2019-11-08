@@ -17,7 +17,8 @@ class DetailsActivity : BaseActivity() {
     }
 
     private fun openFragment() {
-        val fragment = DetailsFragment.newInstance()
+        val fragment =
+            DetailsFragment.newInstance(intent.getParcelableExtra(DetailsFragment.PARAMETER_MOVIE))
         supportFragmentManager.addFragment(containerId, fragment)
     }
 

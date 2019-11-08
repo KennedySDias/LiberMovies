@@ -17,6 +17,7 @@ import com.kennedydias.libermovies.databinding.FragmentMoviesBinding
 import com.kennedydias.libermovies.listener.OnSnapPositionChangeListener
 import com.kennedydias.libermovies.ui.base.BaseFragment
 import com.kennedydias.libermovies.ui.details.DetailsActivity
+import com.kennedydias.libermovies.ui.details.DetailsFragment
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -174,6 +175,7 @@ class MoviesFragment : BaseFragment() {
 
     private fun handleSeeMore(movie: MovieShortData) {
         val newIntent = Intent(context, DetailsActivity::class.java)
+        newIntent.putExtra(DetailsFragment.PARAMETER_MOVIE, movie)
         startActivity(newIntent)
     }
 
