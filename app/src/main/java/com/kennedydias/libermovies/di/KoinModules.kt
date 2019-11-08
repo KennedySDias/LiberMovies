@@ -12,6 +12,7 @@ import com.kennedydias.domain.usecase.GetMoviesListUseCase
 import com.kennedydias.domain.usecase.GetSeriesDetailsUseCase
 import com.kennedydias.domain.usecase.GetSeriesListUseCase
 import com.kennedydias.libermovies.ui.details.DetailsViewModel
+import com.kennedydias.libermovies.ui.favorites.FavoritesViewModel
 import com.kennedydias.libermovies.ui.movies.MoviesViewModel
 import com.kennedydias.libermovies.utils.ResourcesUtils
 import org.koin.android.ext.koin.androidContext
@@ -22,6 +23,7 @@ import org.koin.dsl.module
 val ViewModelModules: Module = module {
     viewModel { MoviesViewModel(get(), get()) }
     viewModel { DetailsViewModel(get(), get()) }
+    viewModel { FavoritesViewModel() }
 }
 
 val DataModules: Module = module {

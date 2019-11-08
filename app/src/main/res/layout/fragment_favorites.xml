@@ -1,39 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorScreenBackground">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.kennedydias.libermovies.ui.favorites.FavoritesViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/colorScreenBackground">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchViewFavorites"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:background="@drawable/shape_rect_rounded_border"
-            android:elevation="2dp"
-            android:focusable="false"
-            app:defaultQueryHint="@string/search"
-            app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_max="400dp"
-            app:queryHint="Search" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSeries"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchViewFavorites" />
+            android:layout_height="match_parent"
+            android:background="@color/colorScreenBackground"
+            android:focusable="false">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewFavoritesLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/favorites"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.core.widget.NestedScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewFavorites"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="32dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFavoritesLabel" />
+
+            <TextView
+                android:id="@+id/textViewEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/no_favorites"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFavoritesLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
