@@ -1,8 +1,8 @@
 package com.kennedydias.libermovies.ui.details
 
 import android.os.Bundle
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kennedydias.commom.SingleLiveEvent
 import com.kennedydias.commom.expection.NotConnectedException
 import com.kennedydias.commom.expection.UnauthorizedException
 import com.kennedydias.domain.model.MovieFullData
@@ -23,12 +23,12 @@ class DetailsViewModel(
     private val resourcesUtils: ResourcesUtils
 ) : ViewModel() {
 
-    val movieOb = MutableLiveData<MovieFullData>()
-    val errorOb = MutableLiveData<String>()
-    val fatalErrorOb = MutableLiveData<String>()
-    val notConnectedOb = MutableLiveData<Boolean>()
-    val gettingDataOb = MutableLiveData<Boolean>()
-    val isFavorite = MutableLiveData<Boolean>()
+    val movieOb = SingleLiveEvent<MovieFullData>()
+    val errorOb = SingleLiveEvent<String>()
+    val fatalErrorOb = SingleLiveEvent<String>()
+    val notConnectedOb = SingleLiveEvent<Boolean>()
+    val gettingDataOb = SingleLiveEvent<Boolean>()
+    val isFavorite = SingleLiveEvent<Boolean>()
 
     fun init(arguments: Bundle?) {
         val movieShortData =

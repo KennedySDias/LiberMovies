@@ -1,7 +1,7 @@
 package com.kennedydias.libermovies.ui.movies
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kennedydias.commom.SingleLiveEvent
 import com.kennedydias.commom.expection.NotConnectedException
 import com.kennedydias.commom.expection.UnauthorizedException
 import com.kennedydias.domain.model.MovieShortData
@@ -19,15 +19,15 @@ class MoviesViewModel(
     private val initialSearchList =
         listOf("Marvel", "Comics", "Disney", "Pokémon", "Super", "Anime")
 
-    val moviesOb = MutableLiveData<List<MovieShortData>>()
-    val seriesOb = MutableLiveData<List<MovieShortData>>()
-    val errorOb = MutableLiveData<String>()
-    val fatalErrorOb = MutableLiveData<String>()
-    val notConnectedOb = MutableLiveData<Boolean>()
-    val gettingDataOb = MutableLiveData<Boolean>()
-    val seeMoreOb = MutableLiveData<MovieShortData>()
-    val openMoviesFilterOb = MutableLiveData<Boolean>()
-    val openSeriesFilterOb = MutableLiveData<Boolean>()
+    val moviesOb = SingleLiveEvent<List<MovieShortData>>()
+    val seriesOb = SingleLiveEvent<List<MovieShortData>>()
+    val errorOb = SingleLiveEvent<String>()
+    val fatalErrorOb = SingleLiveEvent<String>()
+    val notConnectedOb = SingleLiveEvent<Boolean>()
+    val gettingDataOb = SingleLiveEvent<Boolean>()
+    val seeMoreOb = SingleLiveEvent<MovieShortData>()
+    val openMoviesFilterOb = SingleLiveEvent<Boolean>()
+    val openSeriesFilterOb = SingleLiveEvent<Boolean>()
 
     var searchOb: String? = null
 
