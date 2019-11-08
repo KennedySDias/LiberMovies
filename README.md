@@ -16,3 +16,8 @@ Também utilizando algumas bibliotecas como:
   - Material: Componentes de UI do Android.
   
 O aplicativo foi desenvolvido utilizando a linguagem Kotlin e toda as comunições entre as camadas são feitas através de Coroutines.
+
+
+# Como utilizar
+
+Insira a sua API_KEY do OMDB no arquivo `build.gradle` do módulo `Data`.
