@@ -25,6 +25,10 @@
             android:name="com.kennedydias.libermovies.ui.base.BaseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.details.DetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
