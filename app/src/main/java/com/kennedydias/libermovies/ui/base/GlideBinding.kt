@@ -12,6 +12,7 @@ object GlideBinding {
         Glide.with(view.context)
             .load(imageUrl)
             .placeholder(R.drawable.shape_placeholder)
+            .centerCrop()
             .error(R.mipmap.ic_image_break)
             .into(view)
     }

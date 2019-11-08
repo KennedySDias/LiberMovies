@@ -1,6 +1,7 @@
 package com.kennedydias.libermovies
 
 import android.app.Application
+import com.kennedydias.libermovies.di.CommonModules
 import com.kennedydias.libermovies.di.DataModules
 import com.kennedydias.libermovies.di.DomainModules
 import com.kennedydias.libermovies.di.ViewModelModules
@@ -21,7 +22,8 @@ class LiberMoviesApplication : Application() {
         val appModules = listOf(
             DataModules,
             DomainModules,
-            ViewModelModules
+            ViewModelModules,
+            CommonModules
         )
 
         startKoin {

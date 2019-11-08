@@ -10,4 +10,7 @@
     <string name="filter_by_relevance">Filter by Relevance</string>
     <string name="filter_movies_list">Filter movies list</string>
     <string name="filter_series_list">Filter series list</string>
+    <string name="story">Story</string>
+    <string name="cast">Cast</string>
+    <string name="movie_is_missing">Movie is missing</string>
 </resources>
