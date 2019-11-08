@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -14,13 +15,68 @@
 
     </data>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_width="match_parent">
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_rect_rounded_border"
+        android:elevation="2dp"
+        android:onClick="@{() -> viewModel.seeMore(movie)}">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardViewPoster"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{movie.poster}" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{movie.title}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSubtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/materialCardViewPoster"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="title" />
+
+        <TextView
+            android:id="@+id/textViewSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{movie.year}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/materialCardViewPoster"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+            tools:text="2019" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

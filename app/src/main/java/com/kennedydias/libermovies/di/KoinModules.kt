@@ -20,7 +20,7 @@ import org.koin.dsl.module
 val ViewModelModules: Module = module {
     viewModel { MoviesViewModel(get(), get()) }
     viewModel { DetailsViewModel(get(), get(), get(), get(), get()) }
-    viewModel { FavoritesViewModel() }
+    viewModel { FavoritesViewModel(get()) }
 }
 
 val DataModules: Module = module {
@@ -46,6 +46,7 @@ val DomainModules: Module = module {
     factory { GetFavoriteMovieUseCase(get(), get()) }
     factory { SaveFavoriteMovieUseCase(get(), get()) }
     factory { RemoveFavoriteMovieUseCase(get(), get()) }
+    factory { GetFavoritesMoviesUseCase(get(), get()) }
 }
 
 val CommonModules: Module = module {

@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorScreenBackground"
+            android:descendantFocusability="blocksDescendants"
             android:focusable="false">
 
             <TextView
@@ -35,19 +36,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewFavorites"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="32dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFavoritesLabel" />
-
-            <TextView
-                android:id="@+id/textViewEmptyState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="@string/no_favorites"
-                android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFavoritesLabel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
