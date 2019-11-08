@@ -1,11 +1,12 @@
 package com.kennedydias.domain.usecase
 
+import com.kennedydias.data.MoviesRepository
 import com.kennedydias.data.remote.repository.MoviesService
 import com.kennedydias.domain.mapper.MovieMapper
 import com.kennedydias.domain.model.MovieFullData
 
 class GetMovieDetailsUseCase(
-    private val moviesRepository: MoviesService,
+    private val moviesRepository: MoviesRepository,
     private val movieMapper: MovieMapper
 ) : UseCase<MovieFullData>() {
 
