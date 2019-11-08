@@ -7,10 +7,7 @@ import com.kennedydias.data.remote.RetrofitBuilder
 import com.kennedydias.data.remote.repository.MoviesService
 import com.kennedydias.data.remote.repository.MoviesServiceImpl
 import com.kennedydias.domain.mapper.MovieMapper
-import com.kennedydias.domain.usecase.GetMovieDetailsUseCase
-import com.kennedydias.domain.usecase.GetMoviesListUseCase
-import com.kennedydias.domain.usecase.GetSeriesDetailsUseCase
-import com.kennedydias.domain.usecase.GetSeriesListUseCase
+import com.kennedydias.domain.usecase.*
 import com.kennedydias.libermovies.ui.details.DetailsViewModel
 import com.kennedydias.libermovies.ui.favorites.FavoritesViewModel
 import com.kennedydias.libermovies.ui.movies.MoviesViewModel
@@ -22,7 +19,7 @@ import org.koin.dsl.module
 
 val ViewModelModules: Module = module {
     viewModel { MoviesViewModel(get(), get()) }
-    viewModel { DetailsViewModel(get(), get()) }
+    viewModel { DetailsViewModel(get(), get(), get(), get(), get()) }
     viewModel { FavoritesViewModel() }
 }
 
@@ -46,6 +43,9 @@ val DomainModules: Module = module {
     factory { GetMovieDetailsUseCase(get(), get()) }
     factory { GetSeriesListUseCase(get(), get()) }
     factory { GetSeriesDetailsUseCase(get(), get()) }
+    factory { GetFavoriteMovieUseCase(get(), get()) }
+    factory { SaveFavoriteMovieUseCase(get(), get()) }
+    factory { RemoveFavoriteMovieUseCase(get(), get()) }
 }
 
 val CommonModules: Module = module {

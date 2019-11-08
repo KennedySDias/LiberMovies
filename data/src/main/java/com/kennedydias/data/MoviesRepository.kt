@@ -33,6 +33,22 @@ class MoviesRepository(
         return localService.favoritesMoviesDao().getFavoritesMovies()
     }
 
+    suspend fun getFavoriteMovie(imdb: String): MovieShortModel? {
+        return try {
+            localService.favoritesMoviesDao().getFavoriteMovie(imdb).first()
+        } catch (e: NoSuchElementException) {
+            null
+        }
+    }
+
+    suspend fun saveFavoriteMovie(movie: MovieShortModel) {
+        localService.favoritesMoviesDao().insertFavoriteMovie(movie)
+    }
+
+    suspend fun removeFavoriteMovie(movie: MovieShortModel) {
+        localService.favoritesMoviesDao().deleteFavoriteMovie(movie)
+    }
+
     suspend fun saveFavoritesMovie(movie: MovieShortModel): Boolean {
         return try {
             localService.favoritesMoviesDao().insertFavoriteMovie(movie)
